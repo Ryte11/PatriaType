@@ -71,22 +71,22 @@ const hymns = [
   {
     id: 1,
     title: "Himno Nacional",
-    lyrics: "Quisqueyanos valientes, alcemos\nNuestro canto con viva emoción,\nY del mundo a la faz ostentemos\nNuestro invicto glorioso pendón.\n\nSalve el pueblo que, intrépido y fuerte,\nA la guerra a morir se lanzó,\nCuando en bélico reto de muerte\nSus cadenas de esclavo rompió."
+    lyrics: "Quisqueyanos valientes, alcemos<br>Nuestro canto con viva emoción,<br>Y del mundo a la faz ostentemos<br>Nuestro invicto glorioso pendón.<br><br>Salve el pueblo que, intrépido y fuerte,<br>A la guerra a morir se lanzó,<br>Cuando en bélico reto de muerte<br>Sus cadenas de esclavo rompió."
   },
   {
     id: 2,
     title: "Himno a Duarte",
-    lyrics: "Gloria a ti, padre de la patria amada,\nFundador de la dominicana grey;\nTu memoria vivirá siempre sagrada,\nComo emblema de amor, virtud y ley.\n\nFue tu espíritu noble y generoso,\nY tu mente, la luz de la verdad;\nY por darnos un suelo venturoso,\nTu existencia inmolaste sin dudar."
+    lyrics: "Gloria a ti, padre de la patria amada,<br>Fundador de la dominicana grey;<br>Tu memoria vivirá siempre sagrada,<br>Como emblema de amor, virtud y ley.<br><br>Fue tu espíritu noble y generoso,<br>Y tu mente, la luz de la verdad;<br>Y por darnos un suelo venturoso,<br>Tu existencia inmolaste sin dudar."
   },
   {
     id: 3,
     title: "Himno a la Bandera",
-    lyrics: "Bandera dominicana,\nSimiente de libertad,\nSímbolo de la nación,\nTe rendimos homenaje con lealtad.\n\nTus colores rojo y azul,\nTu cruz blanca en el centro,\nNos recuerdan el sacrificio\nDe los que lucharon por nuestra independencia."
+    lyrics: "Bandera dominicana,<br>Simiente de libertad,<br>Símbolo de la nación,<br>Te rendimos homenaje con lealtad.<br><br>Tus colores rojo y azul,<br>Tu cruz blanca en el centro,<br>Nos recuerdan el sacrificio<br>De los que lucharon por nuestra independencia."
   },
   {
     id: 4,
     title: "Himno de la Restauración",
-    lyrics: "Dominicanos, ya la patria os convoca,\nAcudid prestos a la voz del deber;\nQue otra vez gimen, con angustia no poca,\nLos sacros manes de los héroes de ayer.\n\nRestaurado hemos ya su honor mancillado,\nLibre es la patria por segunda ocasión;\nY los que osaron profanar lo sagrado,\nSepan que ahora más altiva es la nación."
+    lyrics: "Dominicanos, ya la patria os convoca,<br>Acudid prestos a la voz del deber;<br>Que otra vez gimen, con angustia no poca,<br>Los sacros manes de los héroes de ayer.<br><br>Restaurado hemos ya su honor mancillado,<br>Libre es la patria por segunda ocasión;<br>Y los que osaron profanar lo sagrado,<br>Sepan que ahora más altiva es la nación."
   }
 ];
 

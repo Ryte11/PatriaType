@@ -123,7 +123,7 @@ function selectMode(modeId) {
 // funcion mecanografia
 
 function setupTypingGame(text, onComplete) {
- const activeScreen = document.querySelector('.screen.active');
+  const activeScreen = document.querySelector('.screen.active');
   
   // Find the typing-text and typing-input elements within the active screen
   const container = activeScreen.querySelector('.typing-text');
@@ -143,16 +143,26 @@ function setupTypingGame(text, onComplete) {
     return;
   }
   
-  // Crear spans para cada carácter (preservando espacios)
-  text.split('').forEach(char => {
+  // Primero reemplazar los <br> por saltos de línea reales para procesamiento
+  const processedText = text.replace(/<br>/g, '\n');
+  
+  // Crear spans para cada carácter (preservando espacios y saltos de línea)
+  processedText.split('').forEach(char => {
     const span = document.createElement('span');
-    span.textContent = char;
+    
+    if (char === '\n') {
+      // Para saltos de línea, usar un <br> real en el DOM
+      span.innerHTML = '<br>';
+      container.appendChild(span);
+      return;
+    }
+    
+    span.innerHTML = char === ' ' ? '&nbsp;' : char;
     span.className = 'typing-char';
     
     // Preservar espacios visualmente
     if (char === ' ') {
       span.style.marginRight = '0.25em';
-      span.innerHTML = '&nbsp;'; // Espacio no rompible
     }
     
     span.style.display = 'inline-block';
@@ -169,51 +179,61 @@ function setupTypingGame(text, onComplete) {
   container.style.marginBottom = '20px';
   container.style.lineHeight = '1.5';
   
+  // Para el juego de tipeo, necesitamos crear una versión plana del texto (sin saltos de línea HTML)
+  const flatText = processedText;
+  
   const spans = container.querySelectorAll('span');
   const typingStats = {
     wpm: 0,
     accuracy: 0,
     mistakes: 0,
-    totalCharacters: text.length
+    totalCharacters: flatText.length
   };
   
   input.value = '';
   input.focus();
   let startTime = null;
-
+  
   // Eliminar eventListeners anteriores
   if (input.typingListener) {
     input.removeEventListener('input', input.typingListener);
   }
-
+  
   input.typingListener = function() {
     if (!startTime && input.value.length > 0) {
-      startTime = Date.now();
+      startTime = new Date();
     }
-
+    
     const value = input.value;
+    
     spans.forEach((span, index) => {
-      if (index < value.length) {
-        const isCorrect = value[index] === text[index];
-        span.className = isCorrect ? 'typing-char correct' : 'typing-char incorrect';
-        span.style.color = isCorrect ? '#4CAF50' : '#F44336';
-        if (!isCorrect && index === value.length - 1) {
-          typingStats.mistakes++;
-        }
+      if (index >= value.length) {
+        span.classList.remove('correct', 'incorrect');
+        return;
+      }
+      
+      const expectedChar = span.textContent || ' ';
+      const typedChar = value[index];
+      
+      if (typedChar === expectedChar || (expectedChar === '\xa0' && typedChar === ' ')) {
+        span.classList.add('correct');
+        span.classList.remove('incorrect');
       } else {
-        span.className = 'typing-char';
+        span.classList.add('incorrect');
+        span.classList.remove('correct');
+        typingStats.mistakes++;
       }
     });
     
-    if (value.length === text.length) {
-      const timeElapsed = (Date.now() - startTime) / 1000 / 60; // en minutos
-      const wordsTyped = text.length / 5; // aproximación de palabras
-      typingStats.wpm = Math.round(wordsTyped / timeElapsed);
-      typingStats.accuracy = Math.round(((text.length - typingStats.mistakes) / text.length) * 100);
+    if (value.length === flatText.length) {
+      const endTime = new Date();
+      const timeDiff = (endTime - startTime) / 1000 / 60; // en minutos
+      typingStats.wpm = Math.round((flatText.length / 5) / timeDiff);
+      typingStats.accuracy = Math.round((flatText.length - typingStats.mistakes) / flatText.length * 100);
       onComplete(typingStats);
     }
   };
-
+  
   input.addEventListener('input', input.typingListener);
 }
 

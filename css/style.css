@@ -592,7 +592,6 @@ body {
     margin: 1.5rem 0;
   }
 }
-
 /* Himnos */
 .hymns-list {
   display: grid;
@@ -680,6 +679,29 @@ body {
   margin-bottom: 1.5rem;
   white-space: pre-line;
   text-align: left;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: none;
+}
+
+/* Ajustes especiales para pantallas pequeñas */
+@media (max-width: 480px) {
+  .hymn-typing-container .typing-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    padding: 0.5rem;
+    /* Evita cortes de palabras */
+    hyphens: none;
+    overflow-wrap: normal;
+    word-break: keep-all;
+  }
+  
+  /* Garantiza que los caracteres del juego de tipeo se muestren correctamente */
+  .typing-char {
+    font-size: 16px !important;
+    white-space: normal !important;
+    word-break: keep-all !important;
+  }
 }
 
 @media (min-width: 768px) {
